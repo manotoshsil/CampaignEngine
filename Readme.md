@@ -6,4 +6,4 @@ To Chain various promotion rules thorug differnt Handler. namely
 ##FixedPriceComboDiscountToCampaign
 ##NItemsBelongingToCampaign
 
-![title](https://ibb.co/89THmpD)
+![alt text](https://ibb.co/89THmpD)
