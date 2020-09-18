@@ -9,7 +9,7 @@ namespace CampaignEngine.CampaignModels
     /// <summary>
     /// Implement Chain of Responsibilty base class 
     /// </summary>
-    public abstract class BaseCampaignDiscountHandler : ICampaignDiscountHandler
+    public  class BaseCampaignDiscountHandler : ICampaignDiscountHandler
     {
         private  ICampaignDiscountHandler _nextPromotionHandler;
 

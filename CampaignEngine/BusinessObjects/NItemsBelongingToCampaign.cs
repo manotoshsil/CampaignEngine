@@ -17,7 +17,7 @@ namespace CampaignEngine.CampaignModels
         }
 		public override ShoppingCart Handle(ShoppingCart cart)
 		{
-            var listOfDiscounts = _campaignDiscountManager.ProcessDiscountOnShoppingCartItem(cart, CampaignType.FixedPriceComboCampaign) as List<NItemsDiscountCampaign>;
+            var listOfDiscounts = _campaignDiscountManager.ProcessDiscountOnShoppingCartItem(cart, CampaignType.NItemsBelongingToCampaign) as List<NItemsDiscountCampaign>;
 
 			foreach (var discount in listOfDiscounts)
 			{
