@@ -9,6 +9,7 @@ namespace CampaignEngine
     {
         public static ShoppingCart Apply(ShoppingCart cart)
         {
+           
             return default;
         }
     }
