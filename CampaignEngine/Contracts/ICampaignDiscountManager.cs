@@ -1,10 +1,13 @@
 ﻿
+using CampaignEngine.BusinessObjects;
+using CampaignEngine.CampaignModels;
 using CampaignEngine.DomainObjects;
+using System.Collections.Generic;
 
 namespace CampaignEngine.Contracts
 {
     public interface ICampaignDiscountManager
     {
-        public void ProcessDiscountOnShoppingCartItem(ShoppingCart cart);
+        public IEnumerable<BaseCampaignModel> ProcessDiscountOnShoppingCartItem(ShoppingCart cart, CampaignType campaign);
     }
 }
