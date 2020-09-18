@@ -9,7 +9,7 @@ namespace CampaignEngine.Tests
         {
             base._data = new List<object[]>
             {
-                new object[] { new List<(string, double, int)> { ("C" , 20 , 1), ("D", 15,1) }, 20 },
+                new object[] { new List<(string, decimal, int)> { ("C" , 20 , 1), ("D", 15,1) }, 20 },
                 
             };
         }
