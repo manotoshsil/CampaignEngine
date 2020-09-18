@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CampaignEngine.Tests
 {
-  public   class BaseTestScenarioData : IEnumerable<object[]>
+  public abstract   class BaseTestScenarioData : IEnumerable<object[]>
     {
         protected List<object[]> _data;
 

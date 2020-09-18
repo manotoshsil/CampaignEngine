@@ -11,8 +11,8 @@ namespace CampaignEngine.Tests
         {
             base._data = new List<object[]>
             {
-                new object[] { new List<(string, decimal, int)> { ("A" , 50 , 5), ("B", 30, 5), ("C", 20, 1) }, 370 },
-                new object[] { new List<(string, decimal, int)> { ("A", 40, 3), ("B", 20, 2) },  175 }
+                new object[] { new List<(string, decimal, int)> { ("A" , 50M , 5), ("B", 30M, 5), ("C", 20M, 1) }, 370M },
+                new object[] { new List<(string, decimal, int)> { ("A", 40M, 3), ("B", 20M, 2) },  175M }
             };
         }
     }
