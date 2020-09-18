@@ -8,7 +8,7 @@ using System.Text;
 
 namespace CampaignEngine.CampaignModels
 {
-    class NItemsBelongingToCampaign: BaseCampaignDiscountHandler, INItemsBelongingToCampaign
+    public class NItemsBelongingToCampaign: BaseCampaignDiscountHandler, INItemsBelongingToCampaign
 	{
         private readonly ICampaignDiscountManager _campaignDiscountManager;
         public NItemsBelongingToCampaign(ICampaignDiscountManager campaignDiscountManager)

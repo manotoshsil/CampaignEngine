@@ -13,26 +13,15 @@ namespace CampaignEngine.Tests
 {
     public class CampaignScenarios
     {
-        private ServiceProvider serviceProvider;
-        public CampaignScenarios()
-        {
-              serviceProvider = new ServiceCollection()
-              .AddSingleton<ICampaignEngineManager, CampaignEngineManager>()
-              .AddSingleton<ICampaignDiscountHandler, BaseCampaignDiscountHandler>()
-              .AddSingleton<ICampaignAbstractFactory, CampaignPolicyFactory>()
-              .AddSingleton<ICampaignDiscountManager, CampaignDiscountManager>()
-              .AddSingleton<IFixedPriceComboDiscountToCampaign, FixedPriceComboDiscountToCampaign>()
-              .AddSingleton<INItemsBelongingToCampaign, INItemsBelongingToCampaign>()
-              .BuildServiceProvider();
-        }
+       
         [Theory]
         [ClassData(typeof(NoCampaignApplicable_TestScenarioData))]
         public void Given_No_Campaign_Applicable_Then_Engine_Should_return_Net_total(List<(string , decimal , int )> cartItems, decimal total)
         {
             var shoppingCart = new ShoppingCart();
             cartItems.ForEach((parameters) => shoppingCart.AddItemWithPriceAndQuantity(parameters.Item1, parameters.Item2 , parameters.Item3));
-            var campaign = serviceProvider.GetService<ICampaignEngineManager>();
-            shoppingCart= campaign.Apply(shoppingCart);
+
+            shoppingCart = CommonInvoke(shoppingCart);
             Assert.Equal(total, shoppingCart.GetCartTotal());
         }
 
@@ -42,8 +31,8 @@ namespace CampaignEngine.Tests
         {
             var shoppingCart = new ShoppingCart();
             cartItems.ForEach((parameters) => shoppingCart.AddItemWithPriceAndQuantity(parameters.Item1, parameters.Item2, parameters.Item3));
-            var campaign = serviceProvider.GetService<ICampaignEngineManager>();
-            shoppingCart = campaign.Apply(shoppingCart);
+            shoppingCart = CommonInvoke(shoppingCart);
+            Assert.Equal(total, shoppingCart.GetCartTotal());
             Assert.Equal(total, shoppingCart.GetCartTotal());
         }
 
@@ -53,9 +42,19 @@ namespace CampaignEngine.Tests
         {
             var shoppingCart = new ShoppingCart();
             cartItems.ForEach((parameters) => shoppingCart.AddItemWithPriceAndQuantity(parameters.Item1, parameters.Item2, parameters.Item3));
-            var campaign = serviceProvider.GetService<ICampaignEngineManager>();
-            shoppingCart = campaign.Apply(shoppingCart);
+            shoppingCart = CommonInvoke(shoppingCart);
             Assert.Equal(total, shoppingCart.GetCartTotal());
+        }
+
+
+        private ShoppingCart CommonInvoke(ShoppingCart cart)
+        {
+            var campaignPolicyFactory = new CampaignPolicyFactory();
+            var campaignDiscountManager = new CampaignDiscountManager(campaignPolicyFactory);
+            var nItemsBelongingToCampaign = new NItemsBelongingToCampaign(campaignDiscountManager);
+            var fixedPriceComboDiscountToCampaign = new FixedPriceComboDiscountToCampaign(campaignDiscountManager);
+            var campaign = new CampaignEngineManager(nItemsBelongingToCampaign, fixedPriceComboDiscountToCampaign);
+            return campaign.Apply(cart);
         }
     }
 

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CampaignEngine.BusinessObjects
 {
+    //Todo: unable to use Dependency injection if i mark it "abstract" .. hence removed "abstract" from class definition
     public class CampaignPolicyFactory : ICampaignAbstractFactory
     {
         public IEnumerable<BaseCampaignModel> CreateFixedPriceComboDiscountToCampaign()
